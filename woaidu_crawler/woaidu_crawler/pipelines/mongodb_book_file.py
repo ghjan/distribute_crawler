@@ -5,12 +5,12 @@ import os
 import itertools
 import gridfs
 import hashlib
-import urlparse
+import urllib.parse
 import traceback
 import datetime
 from scrapy import log
 from scrapy.item import Item
-from urlparse import urlparse
+from urllib.parse import urlparse
 from pprint import pprint
 from twisted.internet import defer
 from scrapy.http import Request
@@ -30,7 +30,7 @@ class NofilesDrop(DropItem):
         DropItem.__init__(self, *args)
 
     def __str__(self):#####for usage: print e
-        print self.style.ERROR("DROP(NofilesDrop):" + self.original_url)
+        print(self.style.ERROR("DROP(NofilesDrop):" + self.original_url))
 
         return DropItem.__str__(self)
 
@@ -54,7 +54,7 @@ class MongodbBookFilesStore(FSFilesStore):
             self.db = client[shard_db]
             self.fs = gridfs.GridFS(self.db,shard_gridfs_collection)
         except Exception as e:
-            print self.style.ERROR("ERROR(MongodbBookFilesStore): %s"%(str(e),))
+            print(self.style.ERROR("ERROR(MongodbBookFilesStore): %s"%(str(e),)))
             traceback.print_exc()
     
     def persist_file(self, key, file_content, info, filename):

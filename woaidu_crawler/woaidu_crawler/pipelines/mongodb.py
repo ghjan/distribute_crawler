@@ -30,7 +30,7 @@ class SingleMongodbPipeline(object):
             client = MongoClient(self.MONGODB_SERVER,self.MONGODB_PORT) 
             self.db = client[self.MONGODB_DB]
         except Exception as e:
-            print self.style.ERROR("ERROR(SingleMongodbPipeline): %s"%(str(e),))
+            print(self.style.ERROR("ERROR(SingleMongodbPipeline): %s"%(str(e),)))
             traceback.print_exc()
 
     @classmethod
@@ -87,7 +87,7 @@ class ShardMongodbPipeline(object):
             client = MongoClient(self.MONGODB_SERVER,self.MONGODB_PORT) 
             self.db = client[self.MONGODB_DB]
         except Exception as e:
-            print self.style.ERROR("ERROR(ShardMongodbPipeline): %s"%(str(e),))
+            print(self.style.ERROR("ERROR(ShardMongodbPipeline): %s"%(str(e),)))
             traceback.print_exc()
 
     @classmethod

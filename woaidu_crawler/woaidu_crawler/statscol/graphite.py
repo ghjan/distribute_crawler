@@ -41,6 +41,9 @@ class GraphiteStatsCollector(StatsCollector):
         How to use this:
             1.install graphite and configure it.For more infomation about graphite you can visit
         http://graphite.readthedocs.org/en/0.9.10/ and http://graphite.wikidot.com.
+            pip install whisper
+            pip install carbon
+            pip install graphite-web
             2.edit /opt/graphite/webapp/content/js/composer_widgets.js,locate the ‘interval’
         variable inside toggleAutoRefresh function,Change its value from ’60′ to ’1′.
             3.add this in storage-aggregation.conf:

@@ -4,10 +4,10 @@
 import os
 import time
 import hashlib
-import urlparse
+import urllib.parse
 import shutil
-import urllib
-from urlparse import urlparse
+import urllib.request, urllib.parse, urllib.error
+from urllib.parse import urlparse
 from scrapy import log
 from twisted.internet import defer
 from pprint import pprint 
@@ -27,7 +27,7 @@ class FileException(Exception):
         Exception.__init__(self, *args)
 
     def __str__(self):#####for usage: print e
-        print self.style.ERROR("ERROR(FileException): %s"%(Exception.__str__(self),))
+        print(self.style.ERROR("ERROR(FileException): %s"%(Exception.__str__(self),)))
         
         return Exception.__str__(self)
 
@@ -132,7 +132,7 @@ class FilePipeline(MediaPipeline):
         if os.path.isabs(uri):  # to support win32 paths like: C:\\some\dir
             scheme = 'file'
         else:
-            scheme = urlparse.urlparse(uri).scheme
+            scheme = urllib.parse.urlparse(uri).scheme
 
         store_cls = self.STORE_SCHEMES[scheme]
         return store_cls(uri)
@@ -274,9 +274,9 @@ class FilePipeline(MediaPipeline):
             #Split the pathname path into a pair (root, ext) such that root + ext == path
             if os.path.splitext(guessname)[1].lower() in self.FILE_EXTENTION:
                 if urlparse(request.url).netloc in self.URL_GBK_DOMAIN:
-                    filename = urllib.unquote(guessname).decode("gbk").encode("utf-8")
+                    filename = urllib.parse.unquote(guessname).decode("gbk").encode("utf-8")
                 else:
-                    filename = urllib.unquote(guessname)
+                    filename = urllib.parse.unquote(guessname)
                 #print "url:","*"*30,filename
         
         return filename

@@ -4,7 +4,7 @@
 from scrapy.utils.reqser import request_to_dict, request_from_dict
 
 try:
-    import cPickle as pickle
+    import pickle as pickle
 except ImportError:
     import pickle
 

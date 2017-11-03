@@ -17,12 +17,12 @@ class WoaiduSpider(BaseSpider):
 
     def parse(self,response):
         response_selector = HtmlXPathSelector(response)
-        next_link = list_first_item(response_selector.select(u'//div[@class="k2"]/div/a[text()="下一页"]/@href').extract())
+        next_link = list_first_item(response_selector.select('//div[@class="k2"]/div/a[text()="下一页"]/@href').extract())
         if next_link:
             next_link = clean_url(response.url,next_link,response.encoding)
             yield Request(url=next_link, callback=self.parse)
 
-        for detail_link in response_selector.select(u'//div[contains(@class,"sousuolist")]/a/@href').extract():
+        for detail_link in response_selector.select('//div[contains(@class,"sousuolist")]/a/@href').extract():
             if detail_link:
                 detail_link = clean_url(response.url,detail_link,response.encoding)
                 yield Request(url=detail_link, callback=self.parse_detail)
